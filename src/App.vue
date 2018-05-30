@@ -56,7 +56,8 @@ export default {
   },
   methods: {
     storeMessage () {
-
+      messagesRef.push({text: this.messageText, nickname: this.nickname, datetime: Date.now()})
+      this.messageText = ''
     },
     deleteMessage (message) {
 
@@ -76,6 +77,7 @@ export default {
     // Read Data from Firebase
     // value = snapshot.val() | key = snapshot.key
     messagesRef.on('child_added', snapshot => {
+      // console.log({...snapshot.val()})
       this.messages.push({...snapshot.val(), id: snapshot.key})
       if (snapshot.val().nickname !== this.nickname) {
         nativeToast({
