@@ -15,8 +15,8 @@
         <!-- actions -->
         <div v-if="message.nickname === nickname">
           <div v-if="message !== editingMessage">
-            <a @click.prevent="deleteMessage(message)" href="#" class="card-link">Delete</a>
-            <a @click.prevent="editMessage(message)" href="#" class="card-link">Edit</a>
+            <a @click.prevent="deleteMessage(message)" href="#" class="card-link delete text-danger">Delete</a>
+            <a @click.prevent="editMessage(message)" href="#" class="card-link edit">Edit</a>
           </div>
           <div v-else>
             <a @click.prevent="cancelEditing" href="#" class="card-link">Cancel</a>
@@ -153,7 +153,7 @@ export default {
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.63);
 }
 .card-text {
-  margin-bottom: 6px;
+  margin-bottom: 6px !important;
 }
 .card-body {
   padding-bottom: 8px;
@@ -169,5 +169,20 @@ export default {
 }
 .small {
   font-size: 12px !important;
+}
+
+.edit,
+.delete {
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  display: none;
+}
+.delete {
+  right: 60px;
+}
+.card:hover .edit,
+.card:hover .delete {
+  display: block;
 }
 </style>
