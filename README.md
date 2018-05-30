@@ -1,6 +1,7 @@
 # Vue.js + Firebase Realtime Database
 > A Vue.js project
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54b1b3bc7b654597a37751b9c198701a)](https://app.codacy.com/app/palashmon/vuejs-firebase-01?utm_source=github.com&utm_medium=referral&utm_content=palashmon/vuejs-firebase-01&utm_campaign=badger)
 [![Dependency Status](https://david-dm.org/palashmon/vuejs-firebase-01/status.svg)](https://david-dm.org/palashmon/vuejs-firebase-01)
 [![Dev-Dependency Status](https://david-dm.org/palashmon/vuejs-firebase-01/dev-status.svg)](https://david-dm.org/palashmon/vuejs-firebase-01)
 &nbsp;
