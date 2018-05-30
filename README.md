@@ -1,6 +1,9 @@
 # Vue.js + Firebase Realtime Database
-
 > A Vue.js project
+
+[![Dependency Status](https://david-dm.org/palashmon/vuejs-firebase-01/status.svg)](https://david-dm.org/palashmon/vuejs-firebase-01)
+[![Dev-Dependency Status](https://david-dm.org/palashmon/vuejs-firebase-01/dev-status.svg)](https://david-dm.org/palashmon/vuejs-firebase-01)
+&nbsp;
 
 ## Build Setup
 
