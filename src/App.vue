@@ -2,10 +2,13 @@
   <div id="app" class="container">
     <h1>Sample Chat Room</h1>
     <!-- Messages -->
-    <div v-for="message in messages" class="card" :key="message.id" :class="{ 'text-right': message.nickname !== nickname}">
+    <div v-for="message in messages" class="card" :key="message.id" :class="getClass(message)">
       <div class="card-body">
         <!-- nickname -->
-        <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{ message.nickname }}
+          <small class="text-muted small" :class="getTimeClass(message)" v-html="getTime(message)"></small>
+        </h6>
         <!-- content -->
         <p v-if="message !== editingMessage" class="card-text">{{ message.text }}</p>
         <textarea v-else v-model="messageText" class="form-control"></textarea>
@@ -32,7 +35,7 @@
       </div>
       <div class="form-group">
         <label>Nickname:</label>
-        <input v-model.trim="nickname" class="form-control"/>
+        <input v-model.trim.lazy="nickname" class="form-control" @change="saveNickname"/>
       </div>
       <button class="btn btn-primary">Send</button>
     </form>
@@ -52,7 +55,7 @@ export default {
     return {
       messages: [],
       messageText: '',
-      nickname: 'palash',
+      nickname: this.getNickname(),
       editingMessage: null
     }
   },
@@ -72,6 +75,29 @@ export default {
     },
     updateMessage () {
 
+    },
+    isMyText (message){
+      return message.nickname === this.nickname
+    },
+    getClass (message) {
+      return {
+        'text-right': !this.isMyText(message)
+      }
+    },
+    getTimeClass (message) {
+      return {
+        'float-right': this.isMyText(message),
+        'float-left': !this.isMyText(message)
+      }
+    },
+    getTime (message){
+      return new Date(message.datetime).toLocaleString('en-US');
+    },
+    saveNickname (){
+      localStorage.setItem('nickname', this.nickname);
+    },
+    getNickname (){
+      return localStorage.getItem('nickname') ? localStorage.getItem('nickname') : 'Palash';
     }
   },
   created () {
@@ -118,13 +144,13 @@ export default {
   margin-top: 20px;
 }
 .card {
-  box-shadow: 3px 2px 10px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.35);
   margin-bottom: 10px;
   transition: box-shadow 0.3s ease-in-out;
 }
 
 .card:hover {
-  box-shadow: 3px 2px 10px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.63);
 }
 .card-text {
   margin-bottom: 6px;
@@ -136,8 +162,12 @@ export default {
 .card-link,
 .card-text {
   font-size: 12px;
+  letter-spacing: 0.05em;
 }
 .text-right {
   background: whitesmoke;
+}
+.small {
+  font-size: 12px !important;
 }
 </style>
