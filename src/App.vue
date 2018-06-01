@@ -208,4 +208,16 @@ export default {
 .card:hover .delete {
   display: block;
 }
+@media only screen and (max-width: 800px) {
+  .container {
+    width: 80%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
 </style>
