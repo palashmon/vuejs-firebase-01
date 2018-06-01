@@ -39,6 +39,10 @@
       </div>
       <button class="btn btn-primary">Send</button>
     </form>
+
+    <!-- set progressbar -->
+    <vue-progress-bar></vue-progress-bar>
+
   </div>
 </template>
 
@@ -102,6 +106,8 @@ export default {
   },
   created () {
 
+    this.$Progress.start();
+
     // Read Data from Firebase
     // value = snapshot.val() | key = snapshot.key
     messagesRef.on('child_added', snapshot => {
@@ -113,6 +119,9 @@ export default {
             type: 'success'
         })
       }
+
+      //  finish the progress bar
+      this.$Progress.finish()
     });
 
     // Once a record is deleted from Firebase
