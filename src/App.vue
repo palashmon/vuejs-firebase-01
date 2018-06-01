@@ -72,13 +72,16 @@ export default {
       messagesRef.child(message.id).remove()
     },
     editMessage (message) {
-
+      this.editingMessage = message;
+      this.messageText = message.text;
     },
     cancelEditing () {
-
+      this.editingMessage = null;
+      this.messageText = '';
     },
     updateMessage () {
-
+      messagesRef.child(this.editingMessage.id).update({text: this.messageText});
+      this.cancelEditing();
     },
     isMyText (message){
       return message.nickname === this.nickname
@@ -133,6 +136,17 @@ export default {
         nativeToast({
             message: `Message deleted by ${snapshot.val().nickname}`,
             type: 'warning'
+        })
+      }
+    });
+
+    messagesRef.on('child_changed', snapshot => {
+      const updatedMessage = this.messages.find(message => message.id === snapshot.key)
+      updatedMessage.text = snapshot.val().text
+      if (snapshot.val().nickname !== this.nickname) {
+        nativeToast({
+            message: `Message edited by ${snapshot.val().nickname}`,
+            type: 'info'
         })
       }
     });
